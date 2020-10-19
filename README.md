@@ -34,3 +34,5 @@ For example create a new django project
 Running everything inside the container will probably be faster as you can avoid having to rebuild whenever you install a new package.
 
 If you choose to run commands inside if the container, you can run `docker-compose run MY_PROJECT_web pip freeze > requirements.txt` to get all the requirements from the container. 
+
+To access the logs you can output the logs to a txt file by running `docker-compose logs > logs.txt` or you can monitor the log file by running `docker-compose logs -f`.
