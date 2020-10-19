@@ -25,6 +25,8 @@ To connect to the postgres container from the django container use the following
 - **USER** - `postgres`
 - **PORT** - `5432`
 
+
+## Running Commands
 You can run create a virtual environment (`python3 -m venv ENV_NAME`) or you can run everything inside the container. 
 
 For example create a new django project
@@ -35,4 +37,5 @@ Running everything inside the container will probably be faster as you can avoid
 
 If you choose to run commands inside if the container, you can run `docker-compose run MY_PROJECT_web pip freeze > requirements.txt` to get all the requirements from the container. 
 
+## Accessing Logs
 To access the logs you can output the logs to a txt file by running `docker-compose logs > logs.txt` or you can monitor the log file by running `docker-compose logs -f`.
