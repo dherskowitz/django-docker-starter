@@ -4,9 +4,9 @@ A simple Docker Compose workflow for local development with postgres as the data
 
 ## Usage
 
-To get started, make sure you have [Docker installed](https://docs.docker.com/docker-for-mac/install/) on your system, and then clone this repository.
+To get started, make sure you have [Docker installed](https://docs.docker.com/desktop/) on your system, and then clone this repository.
 
-Replace `MY_PROJECT` with your project name to avoid collision with other docker containers. 
+Replace `MY_PROJECT` in `docker-compose.yml` with your project name to avoid collision with other docker containers. 
 
 Next, navigate in your terminal to the directory you cloned this, and spin up the containers for the web server by running `docker-compose up -d --build`. 
 
