@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: MY_PROJECT_db
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - ./app/.env
+    ports:
+      - 5432:5432
+  web:
+    build: .
+    container_name: MY_PROJECT_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - mailhog
+  mailhog:
+    container_name: MY_PROJECT_mailhog
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "8055:8025"
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
