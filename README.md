@@ -6,12 +6,11 @@ A simple Docker Compose workflow for local development with postgres as the data
 
 To get started, make sure you have [Docker installed](https://docs.docker.com/desktop/) on your system, and then clone this repository.
 
-Replace `MY_PROJECT` in `docker-compose.yml` with your project name to avoid collision with other docker containers. 
+- Replace `MY_PROJECT` in `docker-compose.yml` with your project name to avoid collision with other docker containers. 
 
-Next, navigate in your terminal to the directory you cloned this, and spin up the containers for the web server by running `docker-compose up -d --build`. 
+- Create a Django Project in the web container `docker-compose run web django-admin startproject PROJECTNAME DIRECTORY`
 
-This will also install the latest version of Django and psycopg2 in the container. To specify a version create a requirement.txt before running build. 
-
+- Build the other containers by running `docker-compose up -d --build`. 
 
 The containers run on the following ports. Update the `docker-compose.yml` to change the ports:
 
@@ -27,15 +26,13 @@ To connect to the postgres container from the django container use the following
 
 
 ## Running Commands
-You can run create a virtual environment (`python3 -m venv ENV_NAME`) or you can run everything inside the container. 
+Instead of creating a virtual environment you can run everything inside the container. Running everything inside the container will probably be faster as you can avoid having to rebuild whenever you install a new package.
 
-For example create a new django project
-- `docker-compose run MY_PROJECT_web django-admin startproject PROJECT_NAME`
-- `docker-compose run MY_PROJECT_web python manage.py startapp APP_NAME`
+### Create new Django App
+- `docker-compose run web python manage.py startapp APP_NAME`
 
-Running everything inside the container will probably be faster as you can avoid having to rebuild whenever you install a new package.
+### Freeze requirements
+- `docker-compose run MY_PROJECT_web pip freeze > requirements.txt`
 
-If you choose to run commands inside if the container, you can run `docker-compose run MY_PROJECT_web pip freeze > requirements.txt` to get all the requirements from the container. 
-
-## Accessing Logs
-To access the logs you can output the logs to a txt file by running `docker-compose logs > logs.txt` or you can monitor the log file by running `docker-compose logs -f`.
+### View tail of container logs
+- `docker-compose logs -f`
